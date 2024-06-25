@@ -22,9 +22,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       
-      - name: cd into dir
-        run: cd backend
-      
       - name: Set up Rust
         uses: actions-rs/toolchain@v1
         with:
@@ -35,7 +32,7 @@ jobs:
         run: rustup target add ${{ matrix.target }}
 
       - name: Build
-        run: cargo build --release --target ${{ matrix.target }}
+        run: cargo build --manifest-path=backend/Cargo.toml --release --target ${{ matrix.target }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
